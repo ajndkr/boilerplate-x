@@ -14,7 +14,7 @@ Create project templates for any programming language in minutes, with just an i
 - Create conda environment
 
   ```bash
-  conda create -n template-x python=3.8
+  conda create -n template-x python=3.9
   conda activate template-x
   ```
 
