@@ -22,7 +22,7 @@ Project idea: {project_idea}
 Project structure:
 {project_structure}
 
-You have to create file content based on the following project structure. The file content MUST be related to the project idea and structure.
+You have to create file content based on the following project structure. The file content MUST be related to the project idea and structure. ONLY create file content for the file name specified below.
 
 File name: {file_name}
 File content:"""

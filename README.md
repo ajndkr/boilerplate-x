@@ -35,7 +35,7 @@ Create project templates for any programming language in minutes, with just an i
 - Create a new project
 
   ```bash
-  template-x new <project-idea> -p <path-to-project>
+  template-x -p <project-idea> -o <path-to-project>
   ```
 
 ### CI/CD
