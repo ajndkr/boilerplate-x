@@ -9,12 +9,14 @@ packages = [{include = "template_x"}]
 repository = "https://www.github.com/ajndkr/template-x"
 
 [tool.poetry.dependencies]
-python = ">=3.8.1,<4.0"
-click = "^7.1.2"
-langchain = "^0.0.122"
+python = "^3.9"
+click = "^8.1.3"
+langchain = "^0.0.123"
+openai = "^0.27.2"
+tiktoken = "^0.3.2"
 
 [tool.poetry.scripts]
-template-x = "template_x:cli"
+template-x = "template_x.cli:main"
 
 [build-system]
 requires = ["poetry-core"]
