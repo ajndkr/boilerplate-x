@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "template-x"
+version = "0.1.0"
+description = "Create project templates for any programming language in minutes, with just an idea."
+authors = ["Ajinkya Indulkar <26824103+ajndkr@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "template_x"}]
+repository = "https://www.github.com/ajndkr/template-x"
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4.0"
+click = "^7.1.2"
+langchain = "^0.0.122"
+
+[tool.poetry.scripts]
+template-x = "template_x:cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
