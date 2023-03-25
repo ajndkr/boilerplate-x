@@ -2,7 +2,7 @@
 
 This directory contains a collection of example templates generated with Template-X.
 
-- [Todo App in Python](todo-app-python/README.md)
-- [Todo App in GoLang](todo-app-go/README.md)
-- [Todo App in Javascript](todo-app-js/README.md)
-- [Todo App in Rust](todo-app-rust/README.md)
+- [Todo App in Python](todo_app_python/README.md)
+- [Todo App in GoLang](todo_app_go/README.md)
+- [Todo App in Javascript](todo_app_js/README.md)
+- [Todo App in Rust](todo_app_rust/README.md)
