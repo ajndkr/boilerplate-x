@@ -1,0 +1,26 @@
+# Ignore binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore go build files
+*.o
+*.a
+*.test
+
+# Ignore go module files
+/go.mod
+/go.sum
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore compiled output
+/bin/
+/pkg/
+/dist/
+
+# Ignore vendor directory
+/vendor/

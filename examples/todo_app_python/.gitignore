@@ -1,0 +1,50 @@
+# Ignore virtual environments
+venv/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore local development settings
+.env
+
+# Ignore any generated files
+__pycache__/
+
+# Ignore any log files
+*.log
+
+# Ignore any database files
+*.db
+
+# Ignore any backup files
+*.bak
+
+# Ignore any cache files
+*.cache
+
+# Ignore any temporary files
+*.tmp
+
+# Ignore any build files
+build/
+
+# Ignore any distribution files
+dist/
+
+# Ignore any egg files
+*.egg-info/
+
+# Ignore any compiled files
+*.pyo
+
+# Ignore any coverage files
+.coverage
+
+# Ignore any generated documentation
+docs/_build/
+
+# Ignore any generated HTML files
+htmlcov/
+
+# Ignore any generated Jupyter Notebook files
+.ipynb_checkpoints/

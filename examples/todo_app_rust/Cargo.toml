@@ -1,0 +1,202 @@
+[package]
+name = "rust-todo-app"
+version = "0.1.0"
+authors = ["Your Name <your.email@example.com>"]
+edition = "2018"
+
+[dependencies]
+chrono = "0.4.19"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "0.8", features = ["v4"] }
+
+[dev-dependencies]
+assert_cmd = "1.0"
+predicates = "2.0"
+predicates-tree = "2.0"
+tempfile = "3.2"
+
+[[bin]]
+name = "rust-todo-app"
+path = "src/main.rs"
+required-features = ["default"]
+
+[features]
+default = ["chrono", "serde", "uuid"]
+
+
+File name: src/main.rs
+File content:
+
+use std::io::{stdin, stdout, Write};
+use std::process::Command;
+
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Todo {
+    id: Uuid,
+    title: String,
+    completed: bool,
+}
+
+fn main() {
+    let mut todos: Vec<Todo> = Vec::new();
+
+    loop {
+        print!("Enter a command (add, list, complete, quit): ");
+        stdout().flush().unwrap();
+
+        let mut input = String::new();
+        stdin().read_line(&mut input).unwrap();
+
+        let command = input.trim();
+
+        match command {
+            "add" => {
+                print!("Enter a title for the todo: ");
+                stdout().flush().unwrap();
+
+                let mut title = String::new();
+                stdin().read_line(&mut title).unwrap();
+
+                let todo = Todo {
+                    id: Uuid::new_v4(),
+                    title: title.trim().to_string(),
+                    completed: false,
+                };
+
+                todos.push(todo);
+                println!("Todo added successfully!");
+            }
+            "list" => {
+                if todos.is_empty() {
+                    println!("No todos found.");
+                } else {
+                    for todo in &todos {
+                        println!("{} - {}", todo.id, todo.title);
+                    }
+                }
+            }
+            "complete" => {
+                print!("Enter the id of the todo to complete: ");
+                stdout().flush().unwrap();
+
+                let mut id = String::new();
+                stdin().read_line(&mut id).unwrap();
+
+                let id = id.trim();
+
+                let todo_index = todos.iter().position(|t| t.id.to_string() == id);
+
+                match todo_index {
+                    Some(index) => {
+                        todos[index].completed = true;
+                        println!("Todo completed successfully!");
+                    }
+                    None => println!("Todo not found."),
+                }
+            }
+            "quit" => {
+                println!("Goodbye!");
+                break;
+            }
+            _ => println!("Invalid command."),
+        }
+    }
+}
+
+
+File name: src/todo.rs
+File content:
+
+use serde::{Deserialize, Serialize};
+use uuid::Uuid;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Todo {
+    pub id: Uuid,
+    pub title: String,
+    pub completed: bool,
+}
+
+impl Todo {
+    pub fn new(title: String) -> Todo {
+        Todo {
+            id: Uuid::new_v4(),
+            title,
+            completed: false,
+        }
+    }
+}
+
+
+File name: tests/todo_test.rs
+File content:
+
+use super::*;
+
+#[test]
+fn test_new_todo() {
+    let title = String::from("Test Todo");
+    let todo = Todo::new(title.clone());
+
+    assert_eq!(todo.title, title);
+    assert_eq!(todo.completed, false);
+}
+
+#[test]
+fn test_complete_todo() {
+    let mut todo = Todo::new(String::from("Test Todo"));
+    assert_eq!(todo.completed, false);
+
+    todo.completed = true;
+    assert_eq!(todo.completed, true);
+}
+
+
+File name: README.md
+File content:
+
+# Rust Todo App
+
+This is a simple todo app written in Rust.
+
+## Usage
+
+To run the app, use the following command:
+
+```
+cargo run
+```
+
+## Commands
+
+- `add`: Add a new todo
+- `list`: List all todos
+- `complete`: Mark a todo as completed
+- `quit`: Quit the app
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+File name: .gitignore
+File content:
+
+/target/
+**/*.rs.bk
+**/*.swp
+**/*.swo
+**/*.log
+**/*.toml.orig
+**/*.orig
+**/*.rej
+**/*.bak
+**/*.tmp
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/__pycache__/
