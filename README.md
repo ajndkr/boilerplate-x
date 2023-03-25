@@ -1,42 +1,56 @@
-# template-x
+# Template-X - Create GitHub Project Templates in Minutes!
 
-Create project templates for any programming language in minutes, with just an idea.
+Template-X is a powerful and highly customizable Python package that enables you to create GitHub project templates for any programming language in just a few minutes. Have an idea? Turn it into a fully functional template with Template-X!
 
-## Overview
+> DISCLAIMER! This project is highly experimental and is not ready for production use. Use at your own risk!
 
-- [Getting Started](#getting-started)
-- [License](#license)
+<img src="assets/logo.jpeg" alt="template-x-logo" width="200">
 
-## Getting Started
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/template-x/blob/main/LICENSE)
 
-### Setup
+## 🚀 Features
 
-- Create conda environment
+- **Powered by GPT-4 and Langchain**: Template-X uses OpenAI's GPT-4 API and [Langchain](https://langchain.readthedocs.io/en/latest/) framework to generate your project template.
+- **Create templates for any programming language**: Whether it's Python, JavaScript, Go, or any other language, Template-X has got you covered!
+- **Easy to use**: Create a template with a single CLI command.
+- **Cross-platform**: Template-X is compatible with Windows, macOS, and Linux.
+- **Fast**: Create templates in minutes, not hours.
+- **Open source**: Template-X is open source and always will be. Contribute on [GitHub](https://github.com/ajndkr/template-x)!
 
-  ```bash
-  conda create -n template-x python=3.9
-  conda activate template-x
-  ```
+Template-X has a collection of example templates to showcase its capabilities. You can find them in the `examples` folder.
 
-- Install poetry
+## 📖 Table of Contents
 
-  ```bash
-  pip install poetry
-  ```
+- [Quickstart](#-quickstart)
+- [Usage](#-usage)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-- Install dependencies (via poetry)
+## 💾 Installation
 
-  ```bash
-  poetry install
-  ```
+Template-X is built with Python 3.9 and maintained by Poetry.
 
-### Usage
+```bash
 
-- Create a new project
+git clone https://github.com/ajndkr/template-x.git
+pip install poetry
+poetry install
+```
 
-  ```bash
-  template-x -p <project-idea> -o <path-to-project>
-  ```
+## 🎯 Quickstart
+
+Creating a GitHub project template with Template-X is as simple as running the following CLI command:
+
+```bash
+template-x -p "your project idea" -o "path/to/project"
+```
+
+Now, you'll have a new folder at `path/to/project` containing your GitHub project template, which includes a `.gitignore`, `LICENSE`, `README.md`, and more!
+
+## 🤝 Contributing
+
+Contributions are more than welcome! If you have an idea for a new feature or want to help improve Template-X, please create an issue or submit a pull request
+on [GitHub](https://github.com/ajndkr/template-x).
 
 ### CI/CD
 
@@ -47,6 +61,6 @@ Create project templates for any programming language in minutes, with just an i
   pre-commit install
   ```
 
-## License
+## ⚖️ License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+Template-X is released under the [MIT License](https://github.com/ajndkr/template-x/blob/main/LICENSE).
