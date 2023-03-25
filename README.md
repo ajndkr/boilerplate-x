@@ -13,7 +13,6 @@ Template-X is a powerful and highly customizable Python package that enables you
 - **Powered by GPT-4 and Langchain**: Template-X uses OpenAI's GPT-4 API and [Langchain](https://langchain.readthedocs.io/en/latest/) framework to generate your project template.
 - **Create templates for any programming language**: Whether it's Python, JavaScript, Go, or any other language, Template-X has got you covered!
 - **Easy to use**: Create a template with a single CLI command.
-- **Cross-platform**: Template-X is compatible with Windows, macOS, and Linux.
 - **Fast**: Create templates in minutes, not hours.
 - **Open source**: Template-X is open source and always will be. Contribute on [GitHub](https://github.com/ajndkr/template-x)!
 
