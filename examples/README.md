@@ -1,6 +1,6 @@
-# Template-X Examples
+# Boilerplate-X Examples
 
-This directory contains a collection of example templates generated with Template-X.
+This directory contains a collection of example boilerplates generated with Boilerplate-X.
 
 - [Todo App in Python](todo_app_python/README.md)
 - [Todo App in GoLang](todo_app_go/README.md)
