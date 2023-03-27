@@ -8,7 +8,7 @@ Boilerplate-X is a chatGPT-powered solution to create GitHub project boilerplate
 
 Starting a new project can be challenging, especially when it comes to writing basic, repetitive code. While there are many cookiecutter packages that help create an outline for your code, they aren't always tailored to your specific needs. Boilerplate-X, however, utilizes chatGPT to generate not only the foundational code like a cookiecutter but also actual code. This allows you to focus on developing unique features instead of spending hours setting up your repository.
 
-<img src="assets/logo.jpeg" alt="boilerplate-x-logo" width="200">
+<img src="https://raw.githubusercontent.com/ajndkr/boilerplate-x/main/assets/logo.jpeg" alt="boilerplate-x-logo" width="200">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/boilerplate-x/blob/main/LICENSE)
 [![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
