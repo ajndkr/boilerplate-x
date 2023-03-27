@@ -8,6 +8,10 @@ Template-X is a chatGPT-powered library that enables you to create GitHub projec
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/template-x/blob/main/LICENSE)
 
+## Why do I need this?
+
+Starting a new project can be challenging, especially when it comes to writing basic, repetitive code. While there are many cookiecutter packages that help create an outline for your code, they aren't always tailored to your specific needs. Template-X, however, utilizes chatGPT to generate not only the foundational code like a cookiecutter but also actual code. This allows you to focus on developing unique features instead of spending hours setting up your repository.
+
 ## 🚀 Features
 
 - **Powered by chatGPT and Langchain**: Template-X uses OpenAI's chatGPT API and [Langchain](https://langchain.readthedocs.io/en/latest/) framework to generate your project template.
