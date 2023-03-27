@@ -1,6 +1,6 @@
-# Template-X - Create GitHub Project Templates in Minutes!
+# Template-X - Create GitHub Project Boilerplate in Minutes!
 
-Template-X is a powerful and highly customizable Python package that enables you to create GitHub project templates for any programming language in just a few minutes. Have an idea? Turn it into a fully functional template with Template-X!
+Template-X is a chatGPT-powered library that enables you to create GitHub project boilerplate for any programming language in just a few minutes. Have an idea? Turn it into a fully functional repository with Template-X!
 
 > DISCLAIMER! This project is highly experimental and is not ready for production use. Use at your own risk!
 
@@ -38,7 +38,7 @@ poetry install
 
 ## 🎯 Quickstart
 
-Creating a GitHub project template with Template-X is as simple as running the following CLI command:
+Creating a GitHub project boilerplate with Template-X is as simple as running the following CLI command:
 
 ```bash
 template-x -p "your project idea" -o "path/to/project"
