@@ -11,6 +11,8 @@ Starting a new project can be challenging, especially when it comes to writing b
 <img src="assets/logo.jpeg" alt="boilerplate-x-logo" width="200">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/boilerplate-x/blob/main/LICENSE)
+[![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
+[![Publish](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml)
 
 ## 🚀 Features
 
