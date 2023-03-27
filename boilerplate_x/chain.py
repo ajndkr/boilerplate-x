@@ -1,8 +1,8 @@
 from langchain import LLMChain, PromptTemplate
 from langchain.schema import BaseLanguageModel
 
-TEMPLATE_X_DESCRIPTION = "You are boilerplate-x: a chatGPT solution to create github project boilerplate for any programming language in minutes, with just an idea."
-PROJECT_STRUCTURE_TEMPLATE = template = """{boilerplate_x_description}
+_DESCRIPTION = "You are boilerplate-x: a chatGPT solution to create github project boilerplate for any programming language in minutes, with just an idea."
+_PROJECT_STRUCTURE_TEMPLATE = template = """{description}
 
 The git repository is empty and you need to create a list of files required for the project idea. Include all relevant files usually found in a git repository. Also include unit tests.
 
@@ -15,7 +15,7 @@ You must be clear and concise. No explanations required.
 
 Project idea: {project_idea}
 YAML Output:"""
-PROJECT_FILE_TEMPLATE = """{boilerplate_x_description}
+_PROJECT_FILE_TEMPLATE = """{description}
 
 Project idea: {project_idea}
 
@@ -31,9 +31,9 @@ File content:"""
 def load_project_structure_chain(llm: BaseLanguageModel, verbose: bool = False):
     """Loads the project structure chain."""
     prompt = PromptTemplate(
-        template=PROJECT_STRUCTURE_TEMPLATE,
+        template=_PROJECT_STRUCTURE_TEMPLATE,
         input_variables=["project_idea"],
-        partial_variables={"boilerplate_x_description": TEMPLATE_X_DESCRIPTION},
+        partial_variables={"description": _DESCRIPTION},
     )
     return LLMChain(prompt=prompt, llm=llm, verbose=verbose)
 
@@ -41,10 +41,10 @@ def load_project_structure_chain(llm: BaseLanguageModel, verbose: bool = False):
 def load_project_file_chain(llm: BaseLanguageModel, verbose: bool = False):
     """Loads the project file chain."""
     prompt = PromptTemplate(
-        template=PROJECT_FILE_TEMPLATE,
+        template=_PROJECT_FILE_TEMPLATE,
         input_variables=["project_idea", "project_structure", "file_name"],
         partial_variables={
-            "boilerplate_x_description": TEMPLATE_X_DESCRIPTION,
+            "description": _DESCRIPTION,
         },
     )
     return LLMChain(prompt=prompt, llm=llm, verbose=verbose)
