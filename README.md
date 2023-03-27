@@ -33,13 +33,10 @@ Boilerplate-X has a collection of example boilerplates. You can find them in the
 
 ## 💾 Installation
 
-Boilerplate-X is built with Python 3.9 and managed by Poetry.
+Boilerplate-X is available on PyPI and can be installed via `pip`.
 
 ```bash
-
-git clone https://github.com/ajndkr/boilerplate-x.git
-pip install poetry
-poetry install
+pip install boilerplate-x
 ```
 
 ## 🎯 Quickstart
@@ -57,14 +54,34 @@ Now, you'll have a new folder at `path/to/project` containing your GitHub projec
 Contributions are more than welcome! If you have an idea for a new feature or want to help improve Boilerplate-X, please create an issue or submit a pull request
 on [GitHub](https://github.com/ajndkr/boilerplate-x).
 
+### Setup Instructions
+
+Boilerplate-X is built with Python 3.9 and managed by Poetry. Clone this repository and follow the steps below to get started.
+
+#### Create conda environment:
+
+```bash
+conda create -n boilerplate-x python=3.9
+conda activate boilerplate-x
+```
+
+You can choose any other environment manager of your choice.
+
+#### Install dependencies:
+
+```bash
+pip install poetry
+poetry install
+```
+
 ### CI/CD
 
-- Install pre-commit
+Boilerplate-X uses `pre-commit` to run code checks and tests before every commit. To install the pre-commit hooks, run the following commands:
 
-  ```bash
-  pip install pre-commit
-  pre-commit install
-  ```
+```bash
+pip install pre-commit
+pre-commit install
+```
 
 ## ⚖️ License
 
