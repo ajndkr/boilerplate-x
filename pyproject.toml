@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "template-x"
+name = "boilerplate-x"
 version = "0.1.0"
-description = "Create project templates for any programming language in minutes, with just an idea."
+description = "Create project boilerplate for any programming language in minutes, with just an idea."
 authors = ["Ajinkya Indulkar <26824103+ajndkr@users.noreply.github.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "template_x"}]
-repository = "https://www.github.com/ajndkr/template-x"
+packages = [{include = "boilerplate_x"}]
+repository = "https://www.github.com/ajndkr/boilerplate-x"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -16,7 +16,7 @@ openai = "^0.27.2"
 tiktoken = "^0.3.2"
 
 [tool.poetry.scripts]
-template-x = "template_x.cli:main"
+boilerplate-x = "boilerplate_x.cli:main"
 
 [build-system]
 requires = ["poetry-core"]

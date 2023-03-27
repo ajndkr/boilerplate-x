@@ -1,8 +1,8 @@
 from langchain import LLMChain, PromptTemplate
 from langchain.schema import BaseLanguageModel
 
-TEMPLATE_X_DESCRIPTION = "You are template-x: A python package to create github project templates for any programming language in minutes, with just an idea."
-PROJECT_STRUCTURE_TEMPLATE = template = """{template_x_description}
+TEMPLATE_X_DESCRIPTION = "You are boilerplate-x: a chatGPT solution to create github project boilerplate for any programming language in minutes, with just an idea."
+PROJECT_STRUCTURE_TEMPLATE = template = """{boilerplate_x_description}
 
 The git repository is empty and you need to create a list of files required for the project idea. Include all relevant files usually found in a git repository. Also include unit tests.
 
@@ -15,7 +15,7 @@ You must be clear and concise. No explanations required.
 
 Project idea: {project_idea}
 YAML Output:"""
-PROJECT_FILE_TEMPLATE = """{template_x_description}
+PROJECT_FILE_TEMPLATE = """{boilerplate_x_description}
 
 Project idea: {project_idea}
 
@@ -33,7 +33,7 @@ def load_project_structure_chain(llm: BaseLanguageModel, verbose: bool = False):
     prompt = PromptTemplate(
         template=PROJECT_STRUCTURE_TEMPLATE,
         input_variables=["project_idea"],
-        partial_variables={"template_x_description": TEMPLATE_X_DESCRIPTION},
+        partial_variables={"boilerplate_x_description": TEMPLATE_X_DESCRIPTION},
     )
     return LLMChain(prompt=prompt, llm=llm, verbose=verbose)
 
@@ -44,7 +44,7 @@ def load_project_file_chain(llm: BaseLanguageModel, verbose: bool = False):
         template=PROJECT_FILE_TEMPLATE,
         input_variables=["project_idea", "project_structure", "file_name"],
         partial_variables={
-            "template_x_description": TEMPLATE_X_DESCRIPTION,
+            "boilerplate_x_description": TEMPLATE_X_DESCRIPTION,
         },
     )
     return LLMChain(prompt=prompt, llm=llm, verbose=verbose)

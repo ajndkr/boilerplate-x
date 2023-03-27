@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 )
 @click.option("-v", "--verbose", is_flag=True, help="Run in verbose mode.")
 def main(prompt: str, output_path: str, verbose: bool):
-    """Template-X CLI.
+    """Boilerplate-X CLI.
 
     Generates a project template at the specified output path based on your project idea.
     """
