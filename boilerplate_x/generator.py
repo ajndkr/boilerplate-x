@@ -10,9 +10,11 @@ logger = logging.getLogger(__name__)
 
 
 class ProjectGenerator:
-    """Generates a project template based on the project idea."""
+    """Generates a project boilerplate code based on the project idea."""
 
-    def __init__(self, prompt: str, output_path: str, verbose: bool) -> None:
+    def __init__(
+        self, prompt: str, output_path: str, verbose: bool, customisation_kwargs: dict
+    ) -> None:
         """Constructor.
 
         Args:
@@ -22,6 +24,7 @@ class ProjectGenerator:
         self.prompt = prompt
         self.output_path = output_path
         self.verbose = verbose
+        self.customisation_kwargs = customisation_kwargs
 
         self.llm = ChatOpenAI(temperature=0, max_tokens=2048)
         self.project_structure_chain = load_project_structure_chain(
@@ -37,7 +40,9 @@ class ProjectGenerator:
     def _generate_project_structure(self) -> list[str]:
         """Generates the project structure."""
         logger.info("Generating project structure...")
-        chain_output = self.project_structure_chain.predict(project_idea=self.prompt)
+        chain_output = self.project_structure_chain.predict(
+            project_idea=self.prompt, **self.customisation_kwargs
+        )
         return yaml.safe_load(chain_output.strip())
 
     def _generate_project_files(self, project_structure: list[str]) -> None:
