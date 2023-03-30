@@ -1,10 +1,8 @@
-_MAP = {
-    True: "yes",
-    False: "no",
-}
+CLI_OPTIONS = ["y", "n"]
+CLI_OPTIONS_FULL = {"y": "yes", "n": "no"}
 
-_DESCRIPTION = "You are an agent to create boilerplate code in any programming language for a given project idea."
-_PROJECT_STRUCTURE_TEMPLATE = template = """{description}
+DESCRIPTION = "You are an agent to create boilerplate code in any programming language for a given project idea."
+PROJECT_STRUCTURE_TEMPLATE = template = """{description}
 
 The git repository is empty and you need to create a list of files required for the project idea. Include all relevant files usually found in a git repository.
 
@@ -23,7 +21,7 @@ You must be clear and concise. No explanations required.
 
 Project idea: {project_idea}
 YAML Output:"""
-_PROJECT_FILE_TEMPLATE = """{description}
+PROJECT_FILE_TEMPLATE = """{description}
 
 Project idea: {project_idea}
 
