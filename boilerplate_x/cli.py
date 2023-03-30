@@ -3,12 +3,35 @@ import logging
 import os
 
 import click
+from rich.logging import RichHandler
 
-from .constants import _MAP
+from .constants import CLI_OPTIONS, CLI_OPTIONS_FULL
 from .generator import ProjectGenerator
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, handlers=[RichHandler(rich_tracebacks=True)])
 logger = logging.getLogger(__name__)
+
+
+def run(
+    prompt: str,
+    output_path: str,
+    verbose: bool,
+    customisation_kwargs: dict,
+    github_repo_creator_kwargs: dict,
+):
+    """Runs ProjectGenerator."""
+    generator = ProjectGenerator(
+        prompt=prompt,
+        output_path=output_path,
+        verbose=verbose,
+        customisation_kwargs=customisation_kwargs,
+        github_repo_creator_kwargs=github_repo_creator_kwargs,
+    )
+
+    logger.info("Generating project template...")
+    generator.generate_template()
+
+    logger.info("Your project is now ready to use!")
 
 
 @click.command()
@@ -21,66 +44,84 @@ logger = logging.getLogger(__name__)
     help="The output path for the generated project template.",
 )
 @click.option(
-    "--unit-tests",
-    "unit_tests",
+    "-g",
+    "--create-github-repo",
+    "enable_github",
     is_flag=True,
-    help="Generate unit tests for the project.",
+    help="Create a GitHub repository for the generated project template.",
 )
 @click.option(
-    "--dockerization",
-    "dockerization",
+    "-c",
+    "--customise",
+    "enable_customisation",
     is_flag=True,
-    help="Generate Dockerfile for the project.",
-)
-@click.option(
-    "--github-actions",
-    "github_actions",
-    is_flag=True,
-    help="Generate GitHub Actions for the project.",
-)
-@click.option(
-    "--pre-commit-hooks",
-    "pre_commit_hooks",
-    is_flag=True,
-    help="Generate pre-commit hooks for the project.",
+    help="Enable customisation options for the project.",
 )
 @click.option("-v", "--verbose", is_flag=True, help="Run in verbose mode.")
 def main(
     prompt: str,
     output_path: str,
+    enable_customisation: bool,
+    enable_github: bool,
     verbose: bool,
-    unit_tests: bool,
-    dockerization: bool,
-    github_actions: bool,
-    pre_commit_hooks: bool,
 ):
     """Boilerplate-X CLI.
 
     Generates a project boilerplate at the specified output path based on your project idea.
     """
+    logger.info("Welcome to Boilerplate-X CLI!")
+
     if not os.environ.get("OPENAI_API_KEY"):
         os.environ["OPENAI_API_KEY"] = getpass.getpass(
             prompt="Enter your OpenAI API key: "
         )
 
-    logger.info("Generating project...")
+    customisation_kwargs = {}
+    if enable_customisation:
+        logger.info(
+            "You are have enabled customisation options. Please select the options you would like to enable."
+        )
+        for opt in [
+            "unit_tests",
+            "dockerization",
+            "github_actions",
+            "pre_commit_hooks",
+        ]:
+            customisation_kwargs[opt] = CLI_OPTIONS_FULL[
+                click.prompt(
+                    f"Enable {opt}?",
+                    type=click.Choice(CLI_OPTIONS),
+                    default="n",
+                    show_choices=True,
+                )
+            ]
 
-    customisation_kwargs = {
-        "unit_tests": _MAP[unit_tests],
-        "dockerization": _MAP[dockerization],
-        "github_actions": _MAP[github_actions],
-        "pre_commit_hooks": _MAP[pre_commit_hooks],
-    }
+    github_repo_creator_kwargs = {}
+    if enable_github:
+        logger.info(
+            "You are about to create a GitHub repository for your project. Please provide your GitHub personal access token. "
+            "Visit https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token for more information."
+            "Recommended scopes: 'repo', 'workflow'"
+        )
+        token = getpass.getpass(prompt="Enter your Github personal access token: ")
+        repo_name = click.prompt("Enter the name of the repository")
+        private = (
+            click.prompt(
+                "Make the repository private?",
+                type=click.Choice(CLI_OPTIONS),
+                default="n",
+                show_choices=True,
+            ).lower()
+            == "y"
+        )
+        github_repo_creator_kwargs = {
+            "token": token,
+            "repo_name": repo_name,
+            "private": private,
+            "target_folder": output_path,
+        }
 
-    generator = ProjectGenerator(
-        prompt=prompt,
-        output_path=output_path,
-        verbose=verbose,
-        customisation_kwargs=customisation_kwargs,
-    )
-    generator.generate_template()
-
-    logger.info(f"Your project is now available at {output_path}!")
+    run(prompt, output_path, verbose, customisation_kwargs, github_repo_creator_kwargs)
 
 
 if __name__ == "__main__":

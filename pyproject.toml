@@ -14,6 +14,9 @@ click = "^8.1.3"
 langchain = "^0.0.123"
 openai = "^0.27.2"
 tiktoken = "^0.3.2"
+pygithub = "^1.58.1"
+gitpython = "^3.1.31"
+rich = "^13.3.3"
 
 [tool.poetry.scripts]
 boilerplate-x = "boilerplate_x.cli:main"

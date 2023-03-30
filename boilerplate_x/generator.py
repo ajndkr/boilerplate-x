@@ -5,6 +5,7 @@ import yaml
 from langchain.chat_models import ChatOpenAI
 
 from .chain import load_project_file_chain, load_project_structure_chain
+from .github import GithubRepoCreator
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,12 @@ class ProjectGenerator:
     """Generates a project boilerplate code based on the project idea."""
 
     def __init__(
-        self, prompt: str, output_path: str, verbose: bool, customisation_kwargs: dict
+        self,
+        prompt: str,
+        output_path: str,
+        verbose: bool,
+        customisation_kwargs: dict,
+        github_repo_creator_kwargs: dict,
     ) -> None:
         """Constructor.
 
@@ -25,6 +31,7 @@ class ProjectGenerator:
         self.output_path = output_path
         self.verbose = verbose
         self.customisation_kwargs = customisation_kwargs
+        self.github_repo_creator_kwargs = github_repo_creator_kwargs
 
         self.llm = ChatOpenAI(temperature=0, max_tokens=2048)
         self.project_structure_chain = load_project_structure_chain(
@@ -36,6 +43,15 @@ class ProjectGenerator:
         """Generates the project template."""
         project_structure = self._generate_project_structure()
         self._generate_project_files(project_structure)
+        logger.info(f"Your project is now available at {self.output_path} !")
+
+        if self.github_repo_creator_kwargs:
+            logger.info("Pushing your project to GitHub...")
+            github_repo_creator = GithubRepoCreator(**self.github_repo_creator_kwargs)
+            github_repo_url = github_repo_creator.setup_github_repo()
+            logger.info(
+                f"Your GitHub repository is now available at {github_repo_url} !"
+            )
 
     def _generate_project_structure(self) -> list[str]:
         """Generates the project structure."""
