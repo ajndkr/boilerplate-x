@@ -20,6 +20,7 @@ Starting a new project can be challenging, especially when it comes to writing b
 - **Create boilerplate for any programming language**: Whether it's Python, JavaScript, Go, or any other language, Boilerplate-X has got you covered!
 - **Easy to use**: Create a template with a single CLI command.
 - **Fast**: Create boilerplate in minutes, not hours.
+- **Customizable**: Boilerplate-X allows you to customize your template with available options, such as adding unit tests, CI/CD, and more.
 - **Open source**: Boilerplate-X is open source and always will be. Contribute on [GitHub](https://github.com/ajndkr/boilerplate-x)!
 
 Boilerplate-X has a collection of example boilerplates. You can find them in the [`examples`](./examples/README.md) folder.
@@ -54,34 +55,7 @@ Now, you'll have a new folder at `path/to/project` containing your GitHub projec
 Contributions are more than welcome! If you have an idea for a new feature or want to help improve Boilerplate-X, please create an issue or submit a pull request
 on [GitHub](https://github.com/ajndkr/boilerplate-x).
 
-### Setup Instructions
-
-Boilerplate-X is built with Python 3.9 and managed by Poetry. Clone this repository and follow the steps below to get started.
-
-#### Create conda environment:
-
-```bash
-conda create -n boilerplate-x python=3.9
-conda activate boilerplate-x
-```
-
-You can choose any other environment manager of your choice.
-
-#### Install dependencies:
-
-```bash
-pip install poetry
-poetry install
-```
-
-### CI/CD
-
-Boilerplate-X uses `pre-commit` to run code checks and tests before every commit. To install the pre-commit hooks, run the following commands:
-
-```bash
-pip install pre-commit
-pre-commit install
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 ## ⚖️ License
 
