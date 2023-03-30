@@ -22,6 +22,7 @@ Starting a new project can be challenging, especially when it comes to writing b
 - **Fast**: Create boilerplate in minutes, not hours.
 - **Customizable**: Boilerplate-X allows you to customize your template with available options, such as adding unit tests, CI/CD, and more.
 - **Open source**: Boilerplate-X is open source and always will be. Contribute on [GitHub](https://github.com/ajndkr/boilerplate-x)!
+- **GitHub integration**: Boilerplate-X integrates with GitHub to create a new repository for your project.
 
 Boilerplate-X has a collection of example boilerplates. You can find them in the [`examples`](./examples/README.md) folder.
 
