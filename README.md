@@ -13,6 +13,7 @@ Starting a new project can be challenging, especially when it comes to writing b
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/boilerplate-x/blob/main/LICENSE)
 [![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
 [![Publish](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml)
+[![PyPI version](https://badge.fury.io/py/boilerplate-x.svg)](https://pypi.org/project/boilerplate-x/)
 
 ## 🚀 Features
 
