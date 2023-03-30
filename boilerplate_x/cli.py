@@ -7,10 +7,31 @@ from rich.logging import RichHandler
 
 from .constants import CLI_OPTIONS, CLI_OPTIONS_FULL
 from .generator import ProjectGenerator
-from .github import GithubRepoCreator
 
 logging.basicConfig(level=logging.INFO, handlers=[RichHandler(rich_tracebacks=True)])
 logger = logging.getLogger(__name__)
+
+
+def run(
+    prompt: str,
+    output_path: str,
+    verbose: bool,
+    customisation_kwargs: dict,
+    github_repo_creator_kwargs: dict,
+):
+    """Runs ProjectGenerator."""
+    generator = ProjectGenerator(
+        prompt=prompt,
+        output_path=output_path,
+        verbose=verbose,
+        customisation_kwargs=customisation_kwargs,
+        github_repo_creator_kwargs=github_repo_creator_kwargs,
+    )
+
+    logger.info("Generating project template...")
+    generator.generate_template()
+
+    logger.info("Your project is now ready to use!")
 
 
 @click.command()
@@ -75,7 +96,7 @@ def main(
                 )
             ]
 
-    github_repo_creator = None
+    github_repo_creator_kwargs = {}
     if enable_github:
         logger.info(
             "You are about to create a GitHub repository for your project. Please provide your GitHub personal access token. "
@@ -92,29 +113,13 @@ def main(
             ).lower()
             == "y"
         )
+        github_repo_creator_kwargs = {
+            "token": token,
+            "repo_name": repo_name,
+            "private": private,
+        }
 
-        github_repo_creator = GithubRepoCreator(
-            token=token,
-            repo_name=repo_name,
-            private=private,
-            target_folder=output_path,
-        )
-
-    generator = ProjectGenerator(
-        prompt=prompt,
-        output_path=output_path,
-        verbose=verbose,
-        customisation_kwargs=customisation_kwargs,
-    )
-
-    logger.info("Generating project template...")
-    generator.generate_template()
-    logger.info(f"Your project is now available at {output_path}!")
-
-    if github_repo_creator:
-        logger.info("Setting up GitHub repository...")
-        github_repo_url = github_repo_creator.setup_github_repo()
-        logger.info(f"Your GitHub repository is now available at {github_repo_url}!")
+    run(prompt, output_path, verbose, customisation_kwargs, github_repo_creator_kwargs)
 
 
 if __name__ == "__main__":
