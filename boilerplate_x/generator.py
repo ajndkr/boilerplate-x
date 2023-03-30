@@ -43,14 +43,14 @@ class ProjectGenerator:
         """Generates the project template."""
         project_structure = self._generate_project_structure()
         self._generate_project_files(project_structure)
-        logger.info(f"Your project is now available at {self.output_path}!")
+        logger.info(f"Your project is now available at {self.output_path} !")
 
         if self.github_repo_creator_kwargs:
             logger.info("Pushing your project to GitHub...")
             github_repo_creator = GithubRepoCreator(**self.github_repo_creator_kwargs)
             github_repo_url = github_repo_creator.setup_github_repo()
             logger.info(
-                f"Your GitHub repository is now available at {github_repo_url}!"
+                f"Your GitHub repository is now available at {github_repo_url} !"
             )
 
     def _generate_project_structure(self) -> list[str]:
