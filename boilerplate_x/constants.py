@@ -34,3 +34,6 @@ You have to create file content based on the following project structure. The fi
 
 File name: {file_name}
 File content:"""
+
+DEFAULT_COMMIT_MESSAGE = "Initial commit (auto-commit by boilerplate-x)"
+DEFAULT_REMOTE = "origin"
