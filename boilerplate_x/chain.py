@@ -8,7 +8,13 @@ def load_project_structure_chain(llm: BaseLanguageModel, verbose: bool = False):
     """Loads the project structure chain."""
     prompt = PromptTemplate(
         template=PROJECT_STRUCTURE_TEMPLATE,
-        input_variables=["project_idea"],
+        input_variables=[
+            "unit_tests",
+            "dockerization",
+            "github_actions",
+            "pre_commit_hooks",
+            "project_idea",
+        ],
         partial_variables={"description": DESCRIPTION},
     )
     return LLMChain(prompt=prompt, llm=llm, verbose=verbose)

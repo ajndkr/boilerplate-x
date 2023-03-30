@@ -101,9 +101,10 @@ def main(
         logger.info(
             "You are about to create a GitHub repository for your project. Please provide your GitHub personal access token. "
             "Visit https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token for more information."
+            "Recommended scopes: 'repo', 'workflow'"
         )
         token = getpass.getpass(prompt="Enter your Github personal access token: ")
-        repo_name = click.prompt("Enter the name of the repository:")
+        repo_name = click.prompt("Enter the name of the repository")
         private = (
             click.prompt(
                 "Make the repository private?",
@@ -117,6 +118,7 @@ def main(
             "token": token,
             "repo_name": repo_name,
             "private": private,
+            "target_folder": output_path,
         }
 
     run(prompt, output_path, verbose, customisation_kwargs, github_repo_creator_kwargs)
