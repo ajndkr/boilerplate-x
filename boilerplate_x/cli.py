@@ -76,25 +76,29 @@ def main(
             prompt="Enter your OpenAI API key: "
         )
 
-    customisation_kwargs = {}
     if enable_customisation:
         logger.info(
-            "You are have enabled customisation options. Please select the options you would like to enable."
+            "You have enabled customisation options. Please select the options you would like to enable."
         )
+
+    customisation_kwargs = {
+        opt: CLI_OPTIONS_FULL[
+            click.prompt(
+                f"Enable {opt}?",
+                type=click.Choice(CLI_OPTIONS),
+                default="n",
+                show_choices=True,
+            )
+        ]
+        if enable_customisation
+        else False
         for opt in [
             "unit_tests",
             "dockerization",
             "github_actions",
             "pre_commit_hooks",
-        ]:
-            customisation_kwargs[opt] = CLI_OPTIONS_FULL[
-                click.prompt(
-                    f"Enable {opt}?",
-                    type=click.Choice(CLI_OPTIONS),
-                    default="n",
-                    show_choices=True,
-                )
-            ]
+        ]
+    }
 
     github_repo_creator_kwargs = {}
     if enable_github:
