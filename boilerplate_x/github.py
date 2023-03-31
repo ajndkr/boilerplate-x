@@ -36,6 +36,8 @@ class GithubRepoCreator:
         # initialize the local repository
         default_branch_name = gh_repo.default_branch
         git_repo = Repo.init(self.target_folder, initial_branch=default_branch_name)
+        git_repo.config_writer().set_value("user", "name", self.user.name).release()
+        git_repo.config_writer().set_value("user", "email", self.user.email).release()
 
         # commit files
         git_repo.git.add(A=True)
