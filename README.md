@@ -51,6 +51,8 @@ boilerplate-x -p "your project idea" -o "path/to/project"
 
 Now, you'll have a new folder at `path/to/project` containing your GitHub project template, which includes a `.gitignore`, `LICENSE`, `README.md`, and more!
 
+For more CLI options, run `boilerplate-x --help`.
+
 ## 🤝 Contributing
 
 [![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
