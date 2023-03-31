@@ -11,9 +11,8 @@ Starting a new project can be challenging, especially when it comes to writing b
 <img src="https://raw.githubusercontent.com/ajndkr/boilerplate-x/main/assets/logo.jpeg" alt="boilerplate-x-logo" width="200">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ajndkr/boilerplate-x/blob/main/LICENSE)
-[![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
-[![Publish](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml)
 [![PyPI version](https://badge.fury.io/py/boilerplate-x.svg)](https://pypi.org/project/boilerplate-x/)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/ajndkr/boilerplate-x)
 
 ## 🚀 Features
 
@@ -53,6 +52,9 @@ boilerplate-x -p "your project idea" -o "path/to/project"
 Now, you'll have a new folder at `path/to/project` containing your GitHub project template, which includes a `.gitignore`, `LICENSE`, `README.md`, and more!
 
 ## 🤝 Contributing
+
+[![Code check](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/code-check.yaml)
+[![Publish](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml/badge.svg)](https://github.com/ajndkr/boilerplate-x/actions/workflows/publish.yaml)
 
 Contributions are more than welcome! If you have an idea for a new feature or want to help improve Boilerplate-X, please create an issue or submit a pull request
 on [GitHub](https://github.com/ajndkr/boilerplate-x).
