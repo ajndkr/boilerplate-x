@@ -35,5 +35,7 @@ ONLY create file content for the file name specified below. You must be clear an
 File name: {file_name}
 File content:"""
 
-DEFAULT_COMMIT_MESSAGE = "Initial commit (auto-commit by boilerplate-x)"
-DEFAULT_REMOTE = "origin"
+GIT_DEFAULT_COMMIT_MESSAGE = "Initial commit"
+GIT_DEFAULT_REMOTE = "origin"
+GIT_USER = "boilerplate-x"
+GIT_EMAIL = "boilerplate-x@noreply.github.com"
