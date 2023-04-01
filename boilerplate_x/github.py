@@ -3,14 +3,10 @@ import logging
 from git import Repo
 from github import Github
 
-from .constants import (
-    GIT_DEFAULT_COMMIT_MESSAGE,
-    GIT_DEFAULT_REMOTE,
-    GIT_EMAIL,
-    GIT_USER,
-)
+from .schemas import GithubRepoCreatorSchema
 
 logger = logging.getLogger(__name__)
+schema = GithubRepoCreatorSchema()
 
 
 class GithubRepoCreator:
@@ -22,7 +18,7 @@ class GithubRepoCreator:
         repo_name: str,
         private: bool,
         target_folder: str,
-        commit_message: str = GIT_DEFAULT_COMMIT_MESSAGE,
+        commit_message: str = schema.default_commit_message,
     ):
         self.token = token
 
@@ -41,8 +37,8 @@ class GithubRepoCreator:
         # initialize the local repository
         default_branch_name = gh_repo.default_branch
         git_repo = Repo.init(self.target_folder, initial_branch=default_branch_name)
-        git_repo.config_writer().set_value("user", "name", GIT_USER).release()
-        git_repo.config_writer().set_value("user", "email", GIT_EMAIL).release()
+        git_repo.config_writer().set_value("user", "name", schema.user).release()
+        git_repo.config_writer().set_value("user", "email", schema.email).release()
 
         # commit files
         git_repo.git.add(A=True)
@@ -50,10 +46,10 @@ class GithubRepoCreator:
 
         # push changes
         git_repo.create_remote(
-            GIT_DEFAULT_REMOTE,
+            schema.default_remote,
             gh_repo.clone_url.replace("https://", f"https://{self.token}@"),
         )
-        git_repo.git.push(GIT_DEFAULT_REMOTE, default_branch_name)
+        git_repo.git.push(schema.default_remote, default_branch_name)
         logger.info("GitHub repository setup complete.")
 
         return gh_repo.html_url

@@ -6,8 +6,10 @@ from langchain.chat_models import ChatOpenAI
 
 from .chain import load_project_file_chain, load_project_structure_chain
 from .github import GithubRepoCreator
+from .schemas import ProjectGeneratorSchema
 
 logger = logging.getLogger(__name__)
+schema = ProjectGeneratorSchema()
 
 
 class ProjectGenerator:
@@ -33,11 +35,12 @@ class ProjectGenerator:
         self.customisation_kwargs = customisation_kwargs
         self.github_repo_creator_kwargs = github_repo_creator_kwargs
 
-        self.llm = ChatOpenAI(temperature=0, max_tokens=2048)
         self.project_structure_chain = load_project_structure_chain(
-            self.llm, self.verbose
+            ChatOpenAI(**schema.project_structure_llm.dict()), self.verbose
         )
-        self.project_file_chain = load_project_file_chain(self.llm, self.verbose)
+        self.project_file_chain = load_project_file_chain(
+            ChatOpenAI(**schema.project_file_llm.dict()), self.verbose
+        )
 
         self.github_repo_url = None
 
@@ -57,16 +60,36 @@ class ProjectGenerator:
 
     def _generate_project_structure(self) -> list[str]:
         """Generates the project structure."""
+        project_structure_file = (
+            Path(self.output_path) / schema.project_structure_file_name
+        )
+        if project_structure_file.exists():
+            logger.info("Using cached project structure...")
+            project_structure = yaml.safe_load(
+                project_structure_file.read_text().strip()
+            )
+            return project_structure
+
         logger.info("Generating project structure...")
         chain_output = self.project_structure_chain.predict(
             project_idea=self.prompt, **self.customisation_kwargs
         )
-        return yaml.safe_load(chain_output.strip())
+        project_structure = yaml.safe_load(chain_output.strip())
+
+        # cache the project structure
+        self._write_file(
+            schema.project_structure_file_name, yaml.safe_dump(project_structure)
+        )
+
+        return project_structure
 
     def _generate_project_files(self, project_structure: list[str]) -> None:
         """Generates the project files."""
         project_structure_str = yaml.safe_dump(project_structure)
         for file_name in project_structure:
+            if (Path(self.output_path) / file_name).exists():
+                logger.info(f"File already exists: {file_name}")
+                continue
             logger.info(f"Generating file content: {file_name}...")
             file_content = self.project_file_chain.predict(
                 project_idea=self.prompt,
