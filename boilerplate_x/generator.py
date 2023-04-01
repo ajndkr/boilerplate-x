@@ -1,3 +1,4 @@
+import concurrent.futures
 import logging
 from pathlib import Path
 
@@ -86,17 +87,32 @@ class ProjectGenerator:
     def _generate_project_files(self, project_structure: list[str]) -> None:
         """Generates the project files."""
         project_structure_str = yaml.safe_dump(project_structure)
-        for file_name in project_structure:
-            if (Path(self.output_path) / file_name).exists():
-                logger.info(f"File already exists: {file_name}")
-                continue
-            logger.info(f"Generating file content: {file_name}...")
-            file_content = self.project_file_chain.predict(
-                project_idea=self.prompt,
-                project_structure=project_structure_str,
-                file_name=file_name,
-            )
-            self._write_file(file_name, file_content)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = []
+            for file_name in project_structure:
+                if (Path(self.output_path) / file_name).exists():
+                    logger.info(f"File already exists: {file_name}")
+                    continue
+                logger.info(f"Generating file content: {file_name}...")
+                futures.append(
+                    executor.submit(
+                        self._generate_project_file, file_name, project_structure_str
+                    )
+                )
+            for future in concurrent.futures.as_completed(futures):
+                if future.exception() is not None:
+                    logger.error(f"Failed to generate file: {future.exception()}")
+
+    def _generate_project_file(
+        self, file_name: str, project_structure_str: str
+    ) -> None:
+        """Generates a single project file."""
+        file_content = self.project_file_chain.predict(
+            project_idea=self.prompt,
+            project_structure=project_structure_str,
+            file_name=file_name,
+        )
+        self._write_file(file_name, file_content)
 
     def _write_file(self, file_name: str, file_content: str):
         """Writes the file to the output path."""
