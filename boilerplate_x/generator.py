@@ -106,6 +106,9 @@ class ProjectGenerator:
                 if (Path(self.output_path) / file_name).exists():
                     logger.info(f"File already exists: {file_name}")
                     continue
+                if (Path(self.output_path) / file_name).suffix == "":
+                    logger.info(f"Skipping directory: {file_name}")
+                    continue
                 logger.info(f"Generating file content: {file_name}...")
                 futures.append(
                     executor.submit(
