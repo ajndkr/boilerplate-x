@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "boilerplate-x"
-version = "0.2.7"
+version = "0.2.8"
 description = "Create project boilerplate for any programming language in minutes, with just an idea."
 authors = ["Ajinkya Indulkar <26824103+ajndkr@users.noreply.github.com>"]
 license = "MIT"
