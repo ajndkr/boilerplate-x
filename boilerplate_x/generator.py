@@ -5,7 +5,11 @@ from pathlib import Path
 import yaml
 from langchain.chat_models import ChatOpenAI
 
-from .chain import load_project_file_chain, load_project_structure_chain
+from .chain import (
+    load_generate_project_structure_chain,
+    load_project_file_chain,
+    load_update_project_structure_chain,
+)
 from .github import GithubRepoCreator
 from .schemas import ProjectGeneratorSchema
 
@@ -36,7 +40,10 @@ class ProjectGenerator:
         self.customisation_kwargs = customisation_kwargs
         self.github_repo_creator_kwargs = github_repo_creator_kwargs
 
-        self.project_structure_chain = load_project_structure_chain(
+        self.generate_project_structure_chain = load_generate_project_structure_chain(
+            ChatOpenAI(**schema.project_structure_llm.dict()), self.verbose
+        )
+        self.update_project_structure_chain = load_update_project_structure_chain(
             ChatOpenAI(**schema.project_structure_llm.dict()), self.verbose
         )
         self.project_file_chain = load_project_file_chain(
@@ -72,9 +79,15 @@ class ProjectGenerator:
             return project_structure
 
         logger.info("Generating project structure...")
-        chain_output = self.project_structure_chain.predict(
-            project_idea=self.prompt, **self.customisation_kwargs
+        chain_output = self.generate_project_structure_chain.predict(
+            project_idea=self.prompt,
         )
+        chain_output = self.update_project_structure_chain.predict(
+            project_idea=self.prompt,
+            project_structure=chain_output,
+            **self.customisation_kwargs,
+        )
+
         project_structure = yaml.safe_load(chain_output.strip())
 
         # cache the project structure
