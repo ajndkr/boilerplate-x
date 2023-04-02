@@ -91,7 +91,7 @@ def main(
             )
         ]
         if enable_customisation
-        else False
+        else "no"
         for opt in [
             "unit_tests",
             "dockerization",
